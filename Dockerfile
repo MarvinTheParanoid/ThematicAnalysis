@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Install uvicorn
-RUN uv add uvicorn
+RUN uv add uvicorn pyyaml
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
@@ -33,4 +33,4 @@ ENTRYPOINT []
 
 # Run the FastAPI application by default
 # Uses uvicorn to run the FastAPI application
-CMD ["uvicorn", "src.thematic_analysis.app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "src.thematic_analysis.app:app", "--host", "0.0.0.0", "--port", "80", "--reload", "--log-config", "log_conf.yaml"]
