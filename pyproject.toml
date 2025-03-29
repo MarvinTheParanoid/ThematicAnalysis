@@ -1,0 +1,82 @@
+[project]
+name = "thematic-analysis"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Jesse Wilson", email = "jesse.wilson@qrious.co.nz" }]
+requires-python = ">=3.13"
+dependencies = ["fastapi>=0.115.12", "pydantic>=2.11.1"]
+
+[project.scripts]
+thematic-analysis = "thematic_analysis:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "pre-commit>=4.2.0",
+ "pytest>=8.3.5",
+ "ruff>=0.11.2",
+]
+
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "docker/venv",
+    "node_modules",
+    "venv",
+    # Exclude specific directories that are not part of the standard
+    "notebooks",
+]
+
+src = ["src"]
+line-length = 88
+indent-width = 4
+target-version = "py311"
+
+
+[tool.ruff.lint]
+# Avoid enforcing whitespace-before-punctuation (`E203`)
+ignore = ["E203"]
+
+
+[tool.ruff.format]
+# Like Black, indent with spaces, rather than tabs
+indent-style = "space"
+
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+
+[tool.ruff.lint.isort]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+lines-between-types = 1

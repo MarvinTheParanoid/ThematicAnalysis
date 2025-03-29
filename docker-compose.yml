@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/app/src
+    environment:
+      - PYTHONPATH=/app/src
