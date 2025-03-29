@@ -5,7 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Jesse Wilson", email = "jesse.wilson@qrious.co.nz" }]
 requires-python = ">=3.13"
-dependencies = ["fastapi>=0.115.12", "pydantic>=2.11.1"]
+dependencies = [
+    "fastapi>=0.115.12",
+    "openai>=1.69.0",
+    "pydantic>=2.11.1",
+    "pydantic-settings>=2.8.1",
+]
 
 [project.scripts]
 thematic-analysis = "thematic_analysis:main"

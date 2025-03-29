@@ -29,8 +29,14 @@ loggers:
     handlers:
       - access
     propagate: no
+  thematic_analysis:
+    level: DEBUG
+    handlers:
+      - default
+      - access
+    propagate: no
 root:
-  level: DEBUG
+  level: INFO
   handlers:
     - default
   propagate: no

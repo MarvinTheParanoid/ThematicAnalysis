@@ -1,12 +1,11 @@
-import logging
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from thematic_analysis.logger import get_logger
 from thematic_analysis.routes import router
 
-logger = logging.getLogger(__name__)
+logger = get_logger()
 
 
 @asynccontextmanager

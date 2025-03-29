@@ -1,6 +1,9 @@
 from fastapi import APIRouter
 
+from thematic_analysis.logger import get_logger
 from thematic_analysis.models import Theme, ThemeRequest, ThemeResponse
+
+logger = get_logger()
 
 router = APIRouter(prefix="/themes", tags=["themes"])
 
