@@ -1,21 +1,11 @@
-from typing import List
-
 from fastapi import FastAPI
-from pydantic import BaseModel
 
-app = FastAPI()
+from thematic_analysis.routes import router
 
-class Theme(BaseModel):
-    name: str
-    summary: str
+app = FastAPI(
+    title="Thematic Analysis API",
+    description="API for analyzing themes in text responses",
+    version="0.1.0",
+)
 
-class RequestModel(BaseModel):
-    question: str
-    answers: List[str]
-
-class ResponseModel(BaseModel):
-    themes: List[Theme]
-
-@app.post("/get-themes", response_model=ResponseModel)
-async def get_themes(request: RequestModel):
-    return ResponseModel(themes=[Theme(name="Mock Theme", summary="This is a mock theme summary.")])
+app.include_router(router)
