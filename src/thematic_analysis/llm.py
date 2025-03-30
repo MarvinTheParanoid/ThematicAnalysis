@@ -48,3 +48,14 @@ async def get_chat_completion_structured(
         response_format=response_schema,
     )
     return response_schema.model_validate(response.choices[0].message.parsed)
+
+
+async def get_embeddings(text: List[str]) -> List[List[float]]:
+    """
+    Get an embedding for a text.
+    """
+    client = get_llm_client()
+    response = await client.embeddings.create(
+        input=text, model=settings.openai_embedding_model
+    )
+    return [embedding.embedding for embedding in response.data]
