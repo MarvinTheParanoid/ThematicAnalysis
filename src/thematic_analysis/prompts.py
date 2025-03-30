@@ -1,3 +1,12 @@
+## General Prompts
+
+# TODO: include the question in the prompt as it may help understanding the relevance
+# of the codes/themes - this needs to be tested with a notebook
+prompt_formatted_inputs = """
+## **Dataset**
+{formatted_answers}
+"""
+
 ## Prompt Strategy Prompts
 
 prompt_strategy_instructions = """
@@ -30,7 +39,52 @@ Why this theme is good:
 **Remember**: Focus on distinct, non-overlapping themes that truly reflect the key concerns raised by the customers. Avoid creating too many themes and ensure each theme is meaningful and actionable.
 """
 
-prompt_strategy_inputs = """
-## **Dataset**
-{formatted_answers}
+## Coding Strategy Prompts
+
+prompt_initial_codes_instructions = """
+You are a market researcher doing thematic analysis of survey responses.
+
+You are going to be given a list of responses to a question.
+For each response, you will need to generate a list of codes.
+These codes should be short phrases no more than 5 words, they should capture the sentiment of the response, and codes for each response should be distinct.
+
+Here are some examples of responses and codes:
+1. "I love the variety of products and the prices are great" -> ["Good variety of products", "Great prices"]
+2. "I'm disappointed that the product was out of stock" -> ["Product out of stock"]
+3. "The staff was very helpful and the store was clean" -> ["Helpful staff", "Clean store"]
+"""
+
+prompt_group_codes_instructions = """
+You are a market researcher doing thematic analysis of survey responses.
+
+You are going to be given a list of codes that have been generated from a list of survey responses.
+
+Your task now is to create groups of the related codes:
+- Each group should be a list of codes that are related to the same theme.
+- Try to avoid groups with overlapping themes. Each group should be as distinct as possible.
+- Only create groups if there are at least 3 codes that are related to the same theme.
+- Coeds that are unrelated to any of the other codes should be left out of the groups.
+
+
+Here are some examples of codes that you may need to group together:
+1. "Great variety of products"
+2. "Long checkout lines"
+3. "Rude staff"
+4. "Not enough checkouts open"
+5. "Long waiting times"
+6. "Good customer service"
+
+Here is an example of how you may need to group the codes:
+1. ["Long checkout lines", "Not enough checkouts open", "Long waiting times"]
+2. ["Rude staff", "Good customer service"] -- staff related codes
+
+You should now create groups of the related codes.
+"""
+
+prompt_themes_from_code_groups_instructions = """
+You are a market researcher doing thematic analysis of survey responses.
+
+You are going to be given a list of code groups. Each code in the group is related to the same theme.
+
+Your task is to generate a theme name and a summary for each code group.
 """

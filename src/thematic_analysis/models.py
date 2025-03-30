@@ -63,3 +63,27 @@ class ThemeResponse(BaseModel):
     """
 
     themes: List[Theme] = Field(..., description="The themes found in the answers.")
+
+
+class Codes(BaseModel):
+    """
+    Represents a list of codes for a single answer.
+    """
+
+    codes: List[str] = Field(..., description="A list of codes")
+
+
+class InitialCodes(BaseModel):
+    """
+    Represents a list of codes for a survey.
+    """
+
+    codes: List[Codes] = Field(..., description="A list of codes for each answer.")
+
+
+class GroupedCodes(BaseModel):
+    """
+    Represents a list of grouped codes for a survey.
+    """
+
+    codes: List[Codes] = Field(..., description="A list of grouped codes.")

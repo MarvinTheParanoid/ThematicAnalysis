@@ -10,6 +10,7 @@ from openai.types.chat.chat_completion_user_message_param import (
 )
 from pydantic import BaseModel
 
+T = TypeVar("T")
 RT = TypeVar("RT", bound=BaseModel)
 
 
@@ -19,6 +20,7 @@ class ThemeStrategy(StrEnum):
     """
 
     PROMPT = "prompt"
+    CODING = "coding"
 
 
 # This is a bit yuck, but cleans up the typing and makes it easier to work with

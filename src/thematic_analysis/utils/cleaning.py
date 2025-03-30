@@ -1,4 +1,4 @@
-from typing import List
+from typing import Iterable
 
 import polars as pl
 
@@ -30,21 +30,9 @@ def clean_answers(answers: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def format_answer_string(answers: pl.Series) -> str:
+def format_answers(answers: Iterable[str], delimiter: str = "\n") -> str:
     """
     Format the answers of a ThemeRequest for a prompt.
     """
-    quoted_answers = [f'"{answer}"' for answer in answers.to_list()]
-    return "\n".join(quoted_answers)
-
-
-def create_survey_answer_list(
-    df: pl.DataFrame, answer_column: str, id_column: str = "Session ID"
-) -> List[SurveyAnswer]:
-    """
-    Quick helper function for testing different endpoints
-    """
-    return [
-        SurveyAnswer(id=id, answer=answer)
-        for id, answer in zip(df[id_column], df[answer_column])
-    ]
+    quoted_answers = [f'"{answer}"' for answer in answers]
+    return delimiter.join(quoted_answers)
