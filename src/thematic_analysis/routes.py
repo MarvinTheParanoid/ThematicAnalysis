@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from thematic_analysis.logger import get_logger
 from thematic_analysis.models import ThemeRequest, ThemeResponse
-from thematic_analysis.strategies.prompt import analyze_themes_with_prompt
+from thematic_analysis.strategies.prompt_strategy import analyze_themes_with_prompt
 from thematic_analysis.types import ThemeStrategy
 
 logger = get_logger()

@@ -1,8 +1,44 @@
-from typing import List
+from typing import List, Union
 
 from pydantic import BaseModel, Field, field_validator
 
 from thematic_analysis.types import ThemeStrategy
+
+
+class SurveyAnswer(BaseModel):
+    """
+    Represents an answer to a survey question.
+    """
+
+    id: str = Field(..., description="The id of the answer.")
+    answer: Union[str, None] = Field(..., description="The answer to the question.")
+
+
+class ThemeRequest(BaseModel):
+    """
+    Represents a request to the thematic analysis API.
+    """
+
+    question: str = Field(..., description="The question to analyze.")
+    answers: List[SurveyAnswer] = Field(
+        ...,
+        description="The answers to analyze.",
+        min_length=1,
+    )
+
+    strategy: ThemeStrategy = Field(
+        ThemeStrategy.PROMPT, description="The strategy to use for the analysis."
+    )
+
+    @field_validator("answers")
+    def validate_ids(cls, v, values):
+        """
+        Check that the ids are unique.
+        """
+        ids = [answer.id for answer in v]
+        if len(set(ids)) != len(ids):
+            raise ValueError("ids must be unique")
+        return v
 
 
 class Theme(BaseModel):
@@ -13,38 +49,12 @@ class Theme(BaseModel):
     name: str = Field(..., description="The name of the theme.")
     summary: str = Field(..., description="A summary of the theme.")
 
-
-class ThemeRequest(BaseModel):
-    """
-    Represents a request to the thematic analysis API.
-    """
-
-    question: str = Field(..., description="The question to analyze.")
-    answers: List[str] = Field(
-        ...,
-        description="The answers to analyze.",
-        min_length=1,
-    )
-    ids: List[str] = Field(
-        ...,
-        description="The ids of the answers.",
-        min_length=1,
-    )
-
-    strategy: ThemeStrategy = Field(
-        ThemeStrategy.PROMPT, description="The strategy to use for the analysis."
-    )
-
-    @field_validator("ids", "answers")
-    def validate_ids(cls, v, values):
+    @property
+    def markdown(self) -> str:
         """
-        Check that the ids are unique and have the same length as the answers.
+        Returns the theme as a markdown string.
         """
-        if len(set(v)) != len(v):
-            raise ValueError("ids must be unique")
-        if len(v) != len(values["answers"]):
-            raise ValueError("answers and ids must have the same length")
-        return v
+        return f"**{self.name}**\n\n{self.summary}"
 
 
 class ThemeResponse(BaseModel):

@@ -1,4 +1,5 @@
 from enum import StrEnum
+from functools import partial
 from typing import TypeAlias, TypeVar, Union
 
 from openai.types.chat.chat_completion_system_message_param import (
@@ -21,6 +22,8 @@ class ThemeStrategy(StrEnum):
 
 
 # This is a bit yuck, but cleans up the typing and makes it easier to work with
-UserMessage: TypeAlias = ChatCompletionUserMessageParam
-SystemMessage: TypeAlias = ChatCompletionSystemMessageParam
-ChatCompletionMessage: TypeAlias = Union[UserMessage, SystemMessage]
+UserMessage = partial(ChatCompletionUserMessageParam, role="user")
+SystemMessage = partial(ChatCompletionSystemMessageParam, role="system")
+ChatCompletionMessage: TypeAlias = Union[
+    ChatCompletionUserMessageParam, ChatCompletionSystemMessageParam
+]
