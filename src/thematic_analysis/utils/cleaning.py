@@ -2,7 +2,7 @@ from typing import Iterable
 
 import polars as pl
 
-from thematic_analysis.models import SurveyAnswer, ThemeRequest
+from thematic_analysis.models import ThemeRequest
 
 
 def theme_request_to_polars(request: ThemeRequest) -> pl.DataFrame:
