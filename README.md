@@ -59,7 +59,9 @@ Additionally, sentiment analysis can be applied to themes (e.g., Customer Servic
 
 ## Approach
 
-I approached this problem in 3 main ways:
+Before diving into the methods, I want to acknowledge that the themes extracted do not match the format provided in the example. Arguably, the initial codes are similar to what is expected, but I chose to focus on extracting general themes (instead of themes per row) as I found it more interesting.
+
+I approached this problem in three main ways:
 
 - **Single Prompt**: This method works well, which is not surprising given that it's essentially a summarization problem. It leverages the strengths of language models in condensing information into coherent themes. This still needs some iteration, and some changes to help it work with larger datasets.
 
