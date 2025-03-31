@@ -63,7 +63,7 @@ I approached this problem in 3 main ways:
 
 - **Single Prompt**: This method works well, which is not surprising given that it's essentially a summarization problem. It leverages the strengths of language models in condensing information into coherent themes. This still needs some iteration, and some changes to help it work with larger datasets.
 
-- **Coding**: This approach was inspired by a challenge article. This approach worked reasonably well, and has some benefits over the single prompt approach, but I think there is a lot of improvements required. This approach could benefit from a reasoning model to improve consistency. Note, the API still needs updates based on insights from the coding notebook
+- **Coding**: This approach was inspired by a challenge article. This approach worked reasonably well, and has some benefits over the single prompt approach, but I think there is a lot of improvements required. This approach could benefit from a reasoning model to improve consistency. Note, the API still needs updates based on insights from the [coding notebook](./notebooks/coding.ipynb).
 
 - **Clustering**: Initially considered as I have fond memories of doing clustering at university, but I don't think it's a good fit for this problem. I started a quick test out of curiosity but didn't pursue it further.
 
