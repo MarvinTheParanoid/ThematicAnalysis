@@ -11,6 +11,16 @@ help:
 	awk 'BEGIN {FS = ":.*?##"}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' | \
 	sort
 
+## Install the project
+install:
+	@uv sync
+	@pre-commit install
+
+## Clean up the project
+clean:
+	@pre-commit clean
+	@rm -rf $(VENV)
+
 ## Run a jupyter labs server
 notebook:
 	@uv run --with jupyter jupyter lab
@@ -26,3 +36,7 @@ fmt:
 ## Run pre-commit checks
 check:
 	@pre-commit run --all-files
+
+## Run using docker
+run-docker:
+	@docker compose up --build
