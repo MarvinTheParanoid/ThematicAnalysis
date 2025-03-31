@@ -1,6 +1,6 @@
 # Thematic Analysis
 
-...add summary of the repo here...
+A simple application demonstrating an approach to extracting themes from text data. This project focuses on analyzing open-text responses to identify recurring themes and patterns. Currently a work in progress and not in a fully working state.
 
 ## Setup
 
@@ -61,4 +61,8 @@ Additionally, sentiment analysis can be applied to themes (e.g., Customer Servic
 
 ## Approach
 
+TODO
+
 ## Next steps
+
+TODO
