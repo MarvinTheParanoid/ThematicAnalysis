@@ -30,7 +30,7 @@ def clean_answers(answers: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def format_answers(answers: Iterable[str], delimiter: str = "\n") -> str:
+def format_list(answers: Iterable[str], delimiter: str = "\n") -> str:
     """
     Format the answers of a ThemeRequest for a prompt.
     """

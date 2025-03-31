@@ -15,7 +15,7 @@ from thematic_analysis.prompts import (
 from thematic_analysis.types import SystemMessage, UserMessage
 from thematic_analysis.utils.cleaning import (
     clean_answers,
-    format_answers,
+    format_list,
     theme_request_to_polars,
 )
 
@@ -28,7 +28,7 @@ async def analyze_themes_with_coding(request: ThemeRequest) -> ThemeResponse:
     """
     answers_df = theme_request_to_polars(request)
     cleaned_answers_df = clean_answers(answers_df)
-    formatted_answers = format_answers(cleaned_answers_df["answer"])
+    formatted_answers = format_list(cleaned_answers_df["answer"])
 
     initial_codes = await generate_initial_codes(formatted_answers)
     grouped_codes = await create_code_groups(initial_codes)
@@ -63,7 +63,7 @@ async def create_code_groups(initial_codes: InitialCodes) -> GroupedCodes:
     """
     # TODO: fix this naming... it's not easy to reason about...
     all_codes = [code for codes in initial_codes.codes for code in codes.codes]
-    formatted_codes = format_answers(all_codes)
+    formatted_codes = format_list(all_codes)
 
     prompts = [
         SystemMessage(
@@ -87,9 +87,9 @@ async def generate_themes_from_code_groups(
     """
     # Format will be a code group per line, with each code group formatted as follows:
     # ("code 1", "code 2", "code 3")
-    formatted_code_groups = format_answers(
+    formatted_code_groups = format_list(
         [
-            f"({', '.join(format_answers(codes.codes, delimiter=', '))})"
+            f"({', '.join(format_list(codes.codes, delimiter=', '))})"
             for codes in grouped_codes.codes
         ],
     )

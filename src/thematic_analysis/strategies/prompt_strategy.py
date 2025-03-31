@@ -7,7 +7,7 @@ from thematic_analysis.prompts import (
 from thematic_analysis.types import SystemMessage, UserMessage
 from thematic_analysis.utils.cleaning import (
     clean_answers,
-    format_answers,
+    format_list,
     theme_request_to_polars,
 )
 
@@ -18,7 +18,7 @@ async def analyze_themes_with_prompt(request: ThemeRequest) -> ThemeResponse:
     """
     answers_df = theme_request_to_polars(request)
     cleaned_answers_df = clean_answers(answers_df)
-    formatted_answers = format_answers(cleaned_answers_df["answer"])
+    formatted_answers = format_list(cleaned_answers_df["answer"])
     prompts = [
         SystemMessage(
             content=prompt_strategy_instructions,

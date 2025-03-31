@@ -28,6 +28,7 @@ async def get_chat_completion(prompts: List[ChatCompletionMessage]) -> str:
     response = await client.chat.completions.create(
         model=settings.openai_completion_model,
         messages=prompts,
+        temperature=0,
     )
     # TODO: add debug logging with info about the response, e.g. tokens used, etc.
     return cast(str, response.choices[0].message.content)
@@ -46,6 +47,7 @@ async def get_chat_completion_structured(
         model=settings.openai_completion_model,
         messages=prompts,
         response_format=response_schema,
+        temperature=0,
     )
     return response_schema.model_validate(response.choices[0].message.parsed)
 
