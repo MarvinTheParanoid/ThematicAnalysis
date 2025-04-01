@@ -31,6 +31,11 @@ source .venv/bin/activate
 pip install -e .[dev]
 ```
 
+Create a .env file in the root of the repository with the following format:
+```shell
+OPENAI_API_KEY=
+```
+
 ### Running
 
 ```shell
